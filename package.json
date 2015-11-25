@@ -1,0 +1,15 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.firebasedemo",
+    "tns-ios": {
+      "version": "1.4.1"
+    },
+    "tns-android": {
+      "version": "1.4.0"
+    }
+  },
+  "dependencies": {
+    "nativescript-firebase": "^1.0.0",
+    "tns-core-modules": "1.4.0"
+  }
+}
