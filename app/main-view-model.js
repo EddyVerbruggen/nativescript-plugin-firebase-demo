@@ -1,5 +1,5 @@
 var observable = require("data/observable");
-var firebase = require("nativescript-firebase");
+var firebase = require("nativescript-plugin-firebase");
 var dialogs = require("ui/dialogs");
 var DemoAppModel = (function (_super) {
   __extends(DemoAppModel, _super);
