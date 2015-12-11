@@ -1,6 +1,5 @@
 var observable = require("data/observable");
 var firebase = require("nativescript-plugin-firebase");
-var dialogs = require("ui/dialogs");
 var DemoAppModel = (function (_super) {
   __extends(DemoAppModel, _super);
   function DemoAppModel() {
@@ -20,6 +19,19 @@ var DemoAppModel = (function (_super) {
     )
   };
 
+  DemoAppModel.prototype.doLoginAnonymously = function () {
+    firebase.login({
+      type: 'anonymous' // TODO const in common
+    }).then(
+        function (result) {
+          console.log("firebase.login done");
+        },
+        function (error) {
+          console.log("firebase.login error: " + error);
+        }
+    )
+  };
+
   DemoAppModel.prototype.doAddChildEventListenerForUsers = function () {
     var that = this;
     var onChildEvent = function(result) {
@@ -30,8 +42,8 @@ var DemoAppModel = (function (_super) {
     };
 
     firebase.addChildEventListener(onChildEvent, "/users").then(
-        function () {
-          console.log("firebase.addChildEventListener added");
+        function (createdListener) {
+          console.log("firebase.addChildEventListener added: " + createdListener);
         },
         function (error) {
           console.log("firebase.addChildEventListener error: " + error);
@@ -49,8 +61,8 @@ var DemoAppModel = (function (_super) {
     };
 
     firebase.addValueEventListener(onValueEvent, "/companies").then(
-        function () {
-          console.log("firebase.addValueEventListener added");
+        function (createdListener) {
+          console.log("firebase.addValueEventListener added: " + createdListener);
         },
         function (error) {
           console.log("firebase.addValueEventListener error: " + error);
