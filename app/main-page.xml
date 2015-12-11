@@ -17,7 +17,8 @@
           <ScrollView>
             <GridLayout columns="*, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" horizontalAlignment="center" cssClass="tab-content">
 
-              <Button row="0" colSpan="2" text="init (do this first)" tap="{{ doInit }}" />
+              <Button row="0" col="0" text="init (do first)" tap="{{ doInit }}" />
+              <Button row="0" col="1" text="login /w Fb" tap="{{ doLoginAnonymously }}" />
 
               <Label row="1" colSpan="2" text="methods on path /users" cssClass="subtitle" />
 
