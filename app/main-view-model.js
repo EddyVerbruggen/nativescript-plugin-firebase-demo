@@ -1,4 +1,5 @@
 var observable = require("data/observable");
+var dialogs = require("ui/dialogs");
 var firebase = require("nativescript-plugin-firebase");
 var DemoAppModel = (function (_super) {
   __extends(DemoAppModel, _super);
@@ -11,7 +12,10 @@ var DemoAppModel = (function (_super) {
       url: 'https://resplendent-fire-4211.firebaseio.com'
     }).then(
         function (result) {
-          console.log("firebase.init done");
+          dialogs.alert({
+            title: "Firebase is ready",
+            okButtonText: "Merci!"
+          })
         },
         function (error) {
           console.log("firebase.init error: " + error);
@@ -21,13 +25,65 @@ var DemoAppModel = (function (_super) {
 
   DemoAppModel.prototype.doLoginAnonymously = function () {
     firebase.login({
-      type: 'anonymous' // TODO const in common
+      // note that you need to enable anonymous login in your firebase instance
+      type: firebase.loginType.ANONYMOUS
     }).then(
         function (result) {
-          console.log("firebase.login done");
+          dialogs.alert({
+            title: "Login OK",
+            message: JSON.stringify(result),
+            okButtonText: "Nice!"
+          })
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Login error",
+            message: errorMessage,
+            okButtonText: "OK, pity"
+          })
+        }
+    )
+  };
+
+  DemoAppModel.prototype.doLoginByPassword = function () {
+    firebase.login({
+      // note that you need to enable email-password login in your firebase instance
+      type: firebase.loginType.PASSWORD,
+      // note that these credentials have been configured in our firebase instance
+      email: 'eddyverbruggen@gmail.com',
+      password: 'firebase'
+    }).then(
+        function (result) {
+          dialogs.alert({
+            title: "Login OK",
+            message: JSON.stringify(result),
+            okButtonText: "Nice!"
+          })
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Login error",
+            message: errorMessage,
+            okButtonText: "OK, pity"
+          })
+        }
+    )
+  };
+
+  DemoAppModel.prototype.doLogout = function () {
+    firebase.logout().then(
+        function (result) {
+          dialogs.alert({
+            title: "Logout OK",
+            okButtonText: "OK, bye!"
+          })
         },
         function (error) {
-          console.log("firebase.login error: " + error);
+          dialogs.alert({
+            title: "Logout error",
+            message: error,
+            okButtonText: "Hmmkay"
+          })
         }
     )
   };
@@ -42,8 +98,8 @@ var DemoAppModel = (function (_super) {
     };
 
     firebase.addChildEventListener(onChildEvent, "/users").then(
-        function (createdListener) {
-          console.log("firebase.addChildEventListener added: " + createdListener);
+        function () {
+          console.log("firebase.addChildEventListener added");
         },
         function (error) {
           console.log("firebase.addChildEventListener error: " + error);
@@ -54,15 +110,23 @@ var DemoAppModel = (function (_super) {
   DemoAppModel.prototype.doAddValueEventListenerForCompanies = function () {
     var that = this;
     var onValueEvent = function(result) {
-      that.set("path", '/companies');
-      that.set("type", result.type);
-      that.set("key", result.key);
-      that.set("value", JSON.stringify(result.value));
+      if (result.error) {
+          dialogs.alert({
+            title: "Listener error",
+            message: result.error,
+            okButtonText: "Darn!"
+          })
+      } else {
+        that.set("path", '/companies');
+        that.set("type", result.type);
+        that.set("key", result.key);
+        that.set("value", JSON.stringify(result.value));
+      }
     };
 
     firebase.addValueEventListener(onValueEvent, "/companies").then(
-        function (createdListener) {
-          console.log("firebase.addValueEventListener added: " + createdListener);
+        function () {
+          console.log("firebase.addValueEventListener added");
         },
         function (error) {
           console.log("firebase.addValueEventListener error: " + error);
