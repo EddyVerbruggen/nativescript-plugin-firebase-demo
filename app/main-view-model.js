@@ -45,6 +45,28 @@ var DemoAppModel = (function (_super) {
     )
   };
 
+  DemoAppModel.prototype.doCreateUser = function () {
+    firebase.createUser({
+      email: 'eddyverbruggen@gmail.com',
+      password: 'firebase'
+    }).then(
+        function (uid) {
+          dialogs.alert({
+            title: "User created",
+            message: "uid: " + uid,
+            okButtonText: "Nice!"
+          })
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "No user created",
+            message: errorMessage,
+            okButtonText: "OK, got it"
+          })
+        }
+    )
+  };
+
   DemoAppModel.prototype.doLoginByPassword = function () {
     firebase.login({
       // note that you need to enable email-password login in your firebase instance
