@@ -9,7 +9,7 @@ If you want to see this app in action first, check this 41 second demo:
 ## Installation
 
 This app is built with the [NativeScript CLI](https://github.com/NativeScript/nativescript-cli).
-Once you have the [CLI installed](https://github.com/NativeScript/nativescript-cli#installation), start by cloning this repo:
+Once you have the CLI [installed](https://github.com/NativeScript/nativescript-cli#installation), start by cloning this repo:
 
 ```
 $ git clone https://github.com/EddyVerbruggen/nativescript-plugin-firebase-demo
