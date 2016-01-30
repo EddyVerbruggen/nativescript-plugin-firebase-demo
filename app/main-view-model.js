@@ -15,34 +15,33 @@ var DemoAppModel = (function (_super) {
           dialogs.alert({
             title: "Firebase is ready",
             okButtonText: "Merci!"
-          })
+          });
         },
         function (error) {
           console.log("firebase.init error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doLoginAnonymously = function () {
     firebase.login({
-      // note that you need to enable anonymous login in your firebase instance
-      type: firebase.loginType.ANONYMOUS
+      type: firebase.LoginType.ANONYMOUS
     }).then(
         function (result) {
           dialogs.alert({
             title: "Login OK",
             message: JSON.stringify(result),
             okButtonText: "Nice!"
-          })
+          });
         },
         function (errorMessage) {
           dialogs.alert({
             title: "Login error",
             message: errorMessage,
             okButtonText: "OK, pity"
-          })
+          });
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doCreateUser = function () {
@@ -55,22 +54,22 @@ var DemoAppModel = (function (_super) {
             title: "User created",
             message: "uid: " + uid,
             okButtonText: "Nice!"
-          })
+          });
         },
         function (errorMessage) {
           dialogs.alert({
             title: "No user created",
             message: errorMessage,
             okButtonText: "OK, got it"
-          })
+          });
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doLoginByPassword = function () {
     firebase.login({
       // note that you need to enable email-password login in your firebase instance
-      type: firebase.loginType.PASSWORD,
+      type: firebase.LoginType.PASSWORD,
       // note that these credentials have been configured in our firebase instance
       email: 'eddyverbruggen@gmail.com',
       password: 'firebase'
@@ -80,16 +79,16 @@ var DemoAppModel = (function (_super) {
             title: "Login OK",
             message: JSON.stringify(result),
             okButtonText: "Nice!"
-          })
+          });
         },
         function (errorMessage) {
           dialogs.alert({
             title: "Login error",
             message: errorMessage,
             okButtonText: "OK, pity"
-          })
+          });
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doLogout = function () {
@@ -98,16 +97,16 @@ var DemoAppModel = (function (_super) {
           dialogs.alert({
             title: "Logout OK",
             okButtonText: "OK, bye!"
-          })
+          });
         },
         function (error) {
           dialogs.alert({
             title: "Logout error",
             message: error,
             okButtonText: "Hmmkay"
-          })
+          });
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doAddChildEventListenerForUsers = function () {
@@ -126,10 +125,11 @@ var DemoAppModel = (function (_super) {
         function (error) {
           console.log("firebase.addChildEventListener error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doAddValueEventListenerForCompanies = function () {
+    var path = "/companies";
     var that = this;
     var onValueEvent = function(result) {
       if (result.error) {
@@ -137,23 +137,23 @@ var DemoAppModel = (function (_super) {
             title: "Listener error",
             message: result.error,
             okButtonText: "Darn!"
-          })
+          });
       } else {
-        that.set("path", '/companies');
+        that.set("path", path);
         that.set("type", result.type);
         that.set("key", result.key);
         that.set("value", JSON.stringify(result.value));
       }
     };
 
-    firebase.addValueEventListener(onValueEvent, "/companies").then(
+   firebase.addValueEventListener(onValueEvent, path).then(
         function () {
           console.log("firebase.addValueEventListener added");
         },
         function (error) {
           console.log("firebase.addValueEventListener error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doUserStoreByPush = function () {
@@ -176,7 +176,7 @@ var DemoAppModel = (function (_super) {
         function (error) {
           console.log("firebase.push error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doStoreCompaniesBySetValue = function () {
@@ -189,10 +189,12 @@ var DemoAppModel = (function (_super) {
         // or even an array of JSON objects
         [
           {
-            name: 'Telerik'
+            name: 'Telerik',
+            country: 'Bulgaria'
           },
           {
-            name: 'Google'
+            name: 'Google',
+            country: 'USA'
           }
         ]
     ).then(
@@ -202,7 +204,7 @@ var DemoAppModel = (function (_super) {
         function (error) {
           console.log("firebase.setValue error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doRemoveUsers = function () {
@@ -213,7 +215,7 @@ var DemoAppModel = (function (_super) {
         function (error) {
           console.log("firebase.remove error: " + error);
         }
-    )
+    );
   };
 
   DemoAppModel.prototype.doRemoveCompanies = function () {
@@ -224,7 +226,104 @@ var DemoAppModel = (function (_super) {
         function (error) {
           console.log("firebase.remove error: " + error);
         }
-    )
+    );
+  };
+
+  DemoAppModel.prototype.doQueryBulgarianCompanies = function () {
+    var path = "/companies";
+    var that = this;
+    var onValueEvent = function(result) {
+      // note that the query returns 1 match at a time,
+      // in the order specified in the query
+      console.log("Query result: " + JSON.stringify(result));
+      if (result.error) {
+          dialogs.alert({
+            title: "Listener error",
+            message: result.error,
+            okButtonText: "Darn!"
+          });
+      } else {
+        that.set("path", path);
+        that.set("type", result.type);
+        that.set("key", result.key);
+        that.set("value", JSON.stringify(result.value));
+      }
+    };
+    firebase.query(
+      onValueEvent,
+      path,
+      {
+        // order by company.country
+        orderBy: {
+          type: firebase.QueryOrderByType.CHILD,
+          value: 'country' // mandatory when type is 'child'
+        },
+        // but only companies named 'Telerik'
+        // (this range relates to the orderBy clause)
+        range: {
+          type: firebase.QueryRangeType.EQUAL_TO,
+          value: 'Bulgaria'
+        },
+        // only the first 2 matches (not that there's only 1 in this case anyway)
+        limit: {
+          type: firebase.QueryLimitType.LAST,
+          value: 2
+        }
+      }
+    ).then(
+      function () {
+        console.log("firebase.doQueryBulgarianCompanies done; added a listener");
+      },
+      function (errorMessage) {
+        dialogs.alert({
+          title: "Login error",
+          message: errorMessage,
+          okButtonText: "OK, pity"
+        });
+      }
+    );
+  };
+
+  DemoAppModel.prototype.doQueryUsers = function () {
+    var path = "/users";
+    var that = this;
+    var onValueEvent = function(result) {
+      // note that the query returns 1 match at a time,
+      // in the order specified in the query
+      console.log("Query result: " + JSON.stringify(result));
+      if (result.error) {
+          dialogs.alert({
+            title: "Listener error",
+            message: result.error,
+            okButtonText: "Darn!!"
+          });
+      } else {
+        that.set("path", path);
+        that.set("type", result.type);
+        that.set("key", result.key);
+        that.set("value", JSON.stringify(result.value));
+      }
+    };
+    firebase.query(
+      onValueEvent,
+      path,
+      {
+        orderBy: {
+          type: firebase.QueryOrderByType.KEY
+        }
+      }
+    ).then(
+      function () {
+        console.log("firebase.doQueryUsers done; added a listener");
+      },
+      function (errorMessage) {
+        dialogs.alert({
+          title: "Login error",
+          message: errorMessage,
+          okButtonText: "OK, pity!"
+        });
+      }
+    );
   };
 
   return DemoAppModel;
