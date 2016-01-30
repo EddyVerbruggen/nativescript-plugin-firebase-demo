@@ -20,7 +20,7 @@
 }
 
 .message {
-  font-size: 12;
+  font-size: 14;
   color: #284848;
   margin: 8 0 8 18;
 }
@@ -30,10 +30,22 @@ label {
 }
 
 button {
-  background-color: #3598db;
+  background-color: #6494AA;
   color: #ffffff;
-  padding: 8 0;
+  padding: 8 12;
   margin: 4 14;
   font-size: 13;
   border-radius: 4;
+}
+
+.button-positive {
+  background-color: #90A959;
+}
+
+.button-user {
+  background-color: #E0A458;
+}
+
+.button-company {
+  background-color: #A63D40;
 }
