@@ -17,31 +17,31 @@
           <ScrollView>
             <GridLayout columns="*, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" horizontalAlignment="stretch" cssClass="tab-content">
 
-              <Button row="0" colSpan="2" text="init firebase - do this first" tap="{{ doInit }}" cssClass="button-positive" />
+              <Button row="0" colSpan="2" text="init firebase - do this first" tap="{{ doInit }}" cssClass="button button-positive" />
 
               <Label row="1" colSpan="2" text="Authentication" cssClass="subtitle" />
 
-              <Button row="2" col="0" text="anonymous login" tap="{{ doLoginAnonymously }}" />
-              <Button row="2" col="1" text="passwd login" tap="{{ doLoginByPassword }}" />
+              <Button row="2" col="0" text="anonymous login" tap="{{ doLoginAnonymously }}" cssClass="button" />
+              <Button row="2" col="1" text="passwd login" tap="{{ doLoginByPassword }}" cssClass="button" />
 
-              <Button row="3" col="0" text="create pwd user" tap="{{ doCreateUser }}" />
-              <Button row="3" col="1" text="logout" tap="{{ doLogout }}" />
+              <Button row="3" col="0" text="create pwd user" tap="{{ doCreateUser }}" cssClass="button" />
+              <Button row="3" col="1" text="logout" tap="{{ doLogout }}" cssClass="button" />
 
               <Label row="4" colSpan="2" text="Methods on path /users" cssClass="subtitle" />
 
-              <Button row="5" col="0" text="add childlistener" tap="{{ doAddChildEventListenerForUsers }}" cssClass="button-user" />
-              <Button row="5" col="1"  text="store by push" tap="{{ doUserStoreByPush }}" cssClass="button-user" />
+              <Button row="5" col="0" text="add childlistener" tap="{{ doAddChildEventListenerForUsers }}" cssClass="button button-user" />
+              <Button row="5" col="1"  text="store by push" tap="{{ doUserStoreByPush }}" cssClass="button button-user" />
 
-              <Button row="6" col="0" text="query users" tap="{{ doQueryUsers }}" cssClass="button-user" />
-              <Button row="6" col="1" text="remove path" tap="{{ doRemoveUsers }}" cssClass="button-user" />
+              <Button row="6" col="0" text="query users" tap="{{ doQueryUsers }}" cssClass="button button-user" />
+              <Button row="6" col="1" text="remove path" tap="{{ doRemoveUsers }}" cssClass="button button-user" />
 
               <Label row="7" colSpan="2" text="Methods on path /companies" cssClass="subtitle"/>
 
-              <Button row="8" col="0" text="add valuelistener" tap="{{ doAddValueEventListenerForCompanies }}" cssClass="button-company" />
-              <Button row="8" col="1" text="store by setValue" tap="{{ doStoreCompaniesBySetValue }}" cssClass="button-company" />
+              <Button row="8" col="0" text="add valuelistener" tap="{{ doAddValueEventListenerForCompanies }}" cssClass="button button-company" />
+              <Button row="8" col="1" text="store by setValue" tap="{{ doStoreCompaniesBySetValue }}" cssClass="button button-company" />
 
-              <Button row="9" col="0" text="query 'Bulgaria'" tap="{{ doQueryBulgarianCompanies }}" cssClass="button-company" />
-              <Button row="9" col="1" text="remove path" tap="{{ doRemoveCompanies }}" cssClass="button-company" />
+              <Button row="9" col="0" text="query 'Bulgaria'" tap="{{ doQueryBulgarianCompanies }}" cssClass="button button-company" />
+              <Button row="9" col="1" text="remove path" tap="{{ doRemoveCompanies }}" cssClass="button button-company" />
 
               <Label row="10" col="0" text="Last update path:" cssClass="message"/>
               <Label row="10" col="1" text="{{ path }}" cssClass="message" textWrap="true" />
