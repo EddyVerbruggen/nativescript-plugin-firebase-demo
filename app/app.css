@@ -31,11 +31,14 @@ label {
 
 button {
   background-color: #6494AA;
-  color: #ffffff;
   padding: 8 12;
   margin: 4 14;
   font-size: 13;
   border-radius: 4;
+}
+
+.button {
+  color: #ffffff;
 }
 
 .button-positive {
