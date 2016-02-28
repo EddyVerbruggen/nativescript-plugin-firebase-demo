@@ -32,7 +32,7 @@
               <Button row="5" col="0" text="add childlistener" tap="{{ doAddChildEventListenerForUsers }}" cssClass="button button-user" />
               <Button row="5" col="1"  text="store by push" tap="{{ doUserStoreByPush }}" cssClass="button button-user" />
 
-              <Button row="6" col="0" text="query users" tap="{{ doQueryUsers }}" cssClass="button button-user" />
+              <Button row="6" col="0" text="query users once" tap="{{ doQueryUsers }}" cssClass="button button-user" />
               <Button row="6" col="1" text="remove path" tap="{{ doRemoveUsers }}" cssClass="button button-user" />
 
               <Label row="7" colSpan="2" text="Methods on path /companies" cssClass="subtitle"/>

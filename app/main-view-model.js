@@ -308,6 +308,7 @@ var DemoAppModel = (function (_super) {
       onValueEvent,
       path,
       {
+        singleEvent: true,
         orderBy: {
           type: firebase.QueryOrderByType.KEY
         }
