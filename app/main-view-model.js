@@ -49,10 +49,10 @@ var DemoAppModel = (function (_super) {
       email: 'eddyverbruggen@gmail.com',
       password: 'firebase'
     }).then(
-        function (uid) {
+        function (result) {
           dialogs.alert({
             title: "User created",
-            message: "uid: " + uid,
+            message: "userId: " + result.key,
             okButtonText: "Nice!"
           });
         },
@@ -170,8 +170,8 @@ var DemoAppModel = (function (_super) {
           }
         }
     ).then(
-        function () {
-          console.log("firebase.push done");
+        function (result) {
+          console.log("firebase.push done, created key: " + result.key);
         },
         function (error) {
           console.log("firebase.push error: " + error);
