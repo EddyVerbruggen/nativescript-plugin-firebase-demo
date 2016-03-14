@@ -26,7 +26,6 @@
 		android:theme="@style/AppTheme" >
 		<activity
 			android:name="com.tns.NativeScriptActivity"
-			android:label="@string/title_activity_kimera"
 			android:configChanges="keyboardHidden|orientation|screenSize">
 
 				<intent-filter>

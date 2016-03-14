@@ -14,6 +14,7 @@ Once you have the CLI [installed](https://github.com/NativeScript/nativescript-c
 ```
 $ git clone https://github.com/EddyVerbruggen/nativescript-plugin-firebase-demo
 $ cd nativescript-plugin-firebase-demo
+$ cd Firebase
 ```
 
 Next, install the app's iOS and Android runtimes, as well as the app's npm dependencies:
