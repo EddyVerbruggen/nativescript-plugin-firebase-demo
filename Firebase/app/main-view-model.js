@@ -91,6 +91,26 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doResetPassword = function () {
+    firebase.resetPassword({
+      email: 'eddyverbruggen@gmail.com'
+    }).then(
+        function (result) {
+          dialogs.alert({
+            title: "Password reset. Check your email.",
+            okButtonText: "OK, nice!"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Password reset error",
+            message: error,
+            okButtonText: "Hmmkay :("
+          });
+        }
+    );
+  };
+
   DemoAppModel.prototype.doLogout = function () {
     firebase.logout().then(
         function (result) {
