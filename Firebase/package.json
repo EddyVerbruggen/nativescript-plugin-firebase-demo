@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-plugin-firebase": "2.1.3",
+    "nativescript-plugin-firebase": "2.1.4",
     "tns-core-modules": "1.6.0"
   },
   "devDependencies": {
