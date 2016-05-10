@@ -7,7 +7,7 @@
             <StackLayout cssClass="tab-content">
               <Image margin="10" src="~/res/telerik-logo.png" />
               <Label text="Firebase plugin demo" cssClass="title"/>
-              <Label text="Create awesome realtime apps with Firebase. Make sure you provide your own Firebase URL in main-view-model.js or expect unexpected things to happen :)" textWrap="true"/>
+              <Label text="Create awesome realtime apps with Firebase. Make sure you provide your own Firebase URL in main-view-model.js" textWrap="true"/>
             </StackLayout>
           </ScrollView>
         </TabViewItem.view>

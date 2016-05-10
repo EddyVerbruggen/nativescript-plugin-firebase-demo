@@ -9,7 +9,8 @@ var DemoAppModel = (function (_super) {
 
   DemoAppModel.prototype.doInit = function () {
     firebase.init({
-      url: 'https://resplendent-fire-4211.firebaseio.com'
+      url: 'https://resplendent-fire-4211.firebaseio.com',
+      persist: true // optional, default false 
     }).then(
         function (result) {
           dialogs.alert({
