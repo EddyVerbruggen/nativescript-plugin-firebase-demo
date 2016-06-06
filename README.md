@@ -23,6 +23,8 @@ Next, install the app's iOS and Android runtimes, as well as the app's npm depen
 $ tns install
 ```
 
+__[Also take the steps listed here, or you will get build errors!](https://github.com/EddyVerbruggen/nativescript-plugin-firebase#prerequisites)__
+
 Now you can use the `run` command to run the demo app on iOS:
 
 ```
