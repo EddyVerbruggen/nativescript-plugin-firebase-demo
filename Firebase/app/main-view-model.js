@@ -8,9 +8,15 @@ var DemoAppModel = (function (_super) {
   }
 
   DemoAppModel.prototype.doInit = function () {
+    var that = this;
     firebase.init({
-      url: 'https://resplendent-fire-4211.firebaseio.com',
-      persist: true // optional, default false 
+      persist: true, // optional, default false
+      onAuthStateChanged: function(data) { // optional
+        console.log((data.loggedIn ? "Logged in to firebase" : "Logged out from firebase") + " (init's onAuthStateChanged callback)");
+        if (data.loggedIn) {
+          that.set("useremail", data.user.email ? data.user.email : "N/A");
+        }
+      }
     }).then(
         function (result) {
           dialogs.alert({
@@ -20,6 +26,25 @@ var DemoAppModel = (function (_super) {
         },
         function (error) {
           console.log("firebase.init error: " + error);
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doGetCurrentUser = function () {
+    firebase.getCurrentUser().then(
+        function (result) {
+          dialogs.alert({
+            title: "Current user",
+            message: JSON.stringify(result),
+            okButtonText: "Nice!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "No current user",
+            message: errorMessage,
+            okButtonText: "OK, thanks"
+          });
         }
     );
   };
@@ -47,13 +72,13 @@ var DemoAppModel = (function (_super) {
 
   DemoAppModel.prototype.doCreateUser = function () {
     firebase.createUser({
-      email: 'eddyverbruggen@gmail.com',
+      email: 'eddy@x-services.nl',
       password: 'firebase'
     }).then(
         function (result) {
           dialogs.alert({
             title: "User created",
-            message: "userId: " + result.key,
+            message: JSON.stringify(result),
             okButtonText: "Nice!"
           });
         },
@@ -67,13 +92,75 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doDeleteUser = function () {
+    firebase.deleteUser().then(
+        function () {
+          dialogs.alert({
+            title: "User deleted",
+            okButtonText: "Nice!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "User not deleted",
+            message: errorMessage,
+            okButtonText: "OK, got it"
+          });
+        }
+    );
+  };
+
   DemoAppModel.prototype.doLoginByPassword = function () {
     firebase.login({
       // note that you need to enable email-password login in your firebase instance
       type: firebase.LoginType.PASSWORD,
       // note that these credentials have been configured in our firebase instance
-      email: 'eddyverbruggen@gmail.com',
+      email: 'eddy@x-services.nl',
       password: 'firebase'
+    }).then(
+        function (result) {
+          dialogs.alert({
+            title: "Login OK",
+            message: JSON.stringify(result),
+            okButtonText: "Nice!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Login error",
+            message: errorMessage,
+            okButtonText: "OK, pity"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doLoginByFacebook = function () {
+    firebase.login({
+      // note that you need to enable Facebook auth in your firebase instance
+      type: firebase.LoginType.FACEBOOK
+    }).then(
+        function (result) {
+          dialogs.alert({
+            title: "Login OK",
+            message: JSON.stringify(result),
+            okButtonText: "Nice!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Login error",
+            message: errorMessage,
+            okButtonText: "OK, pity"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doLoginByGoogle = function () {
+    firebase.login({
+      // note that you need to enable Google auth in your firebase instance
+      type: firebase.LoginType.GOOGLE
     }).then(
         function (result) {
           dialogs.alert({
@@ -94,7 +181,7 @@ var DemoAppModel = (function (_super) {
 
   DemoAppModel.prototype.doResetPassword = function () {
     firebase.resetPassword({
-      email: 'eddyverbruggen@gmail.com'
+      email: 'eddy@x-services.nl'
     }).then(
         function (result) {
           dialogs.alert({

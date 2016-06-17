@@ -49,6 +49,10 @@ button {
   background-color: #E0A458;
 }
 
+.button-state {
+  background-color: #64A4FF;
+}
+
 .button-company {
   background-color: #A63D40;
 }
