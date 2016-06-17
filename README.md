@@ -23,7 +23,10 @@ Next, install the app's iOS and Android runtimes, as well as the app's npm depen
 $ tns install
 ```
 
-__[Also take the steps listed here, or you will get build errors!](https://github.com/EddyVerbruggen/nativescript-plugin-firebase#prerequisites)__
+__Now take these steps to avoid build errors on Android:__
+
+- Copy `app/App_Resources/Android/google-services.json` to `platforms/android/google-services.json` or you'll run into the error "FirebaseApp with name [DEFAULT] doesn't exist."
+- Open `platforms/android/build.gradle` and [do these things](https://github.com/EddyVerbruggen/nativescript-plugin-firebase#open-platformsandroidbuildgradle).
 
 Now you can use the `run` command to run the demo app on iOS:
 
