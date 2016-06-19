@@ -30,6 +30,52 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doGetRemoteConfig = function () {
+    firebase.getRemoteConfig({
+      developerMode: false,
+      cacheExpirationSeconds: 600, // 10 minutes, default is 12 hours
+      properties: [{
+        key: "holiday_promo_enabled",
+        default: false
+      },
+      {
+        key: "default_only_prop",
+        default: 77
+      },
+      {
+        key: "coupons_left",
+        default: 100
+      },
+      {
+        key: "origin",
+        default: "client"
+      },
+      {
+        key: "double_test",
+        default: 9.99
+      },
+      {
+        key: "int_test",
+        default: 11
+      }]
+    }).then(
+        function (result) {
+          dialogs.alert({
+            title: "Fetched at " + result.lastFetch + (result.throttled ? " (throttled)" : ""),
+            message: JSON.stringify(result.properties),
+            okButtonText: "Nice!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Remote Config error",
+            message: errorMessage,
+            okButtonText: "OK, thanks"
+          });
+        }
+    );
+  };
+
   DemoAppModel.prototype.doGetCurrentUser = function () {
     firebase.getCurrentUser().then(
         function (result) {
