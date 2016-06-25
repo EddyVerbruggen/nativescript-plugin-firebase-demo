@@ -13,12 +13,12 @@ android {
     applicationId "org.nativescript.firebasedemo"
   }
 
-  // after adding Facebook SDK's we'll need this 
-  // dexOptions {
-    // javaMaxHeapSize "4g"
-  // }
+  // after adding a few additional Firebase libs we'll need this (otherwise: OutOfMemoryException) 
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
 
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
   }  
-} 
+}

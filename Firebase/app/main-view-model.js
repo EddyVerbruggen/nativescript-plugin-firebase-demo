@@ -16,18 +16,36 @@ var DemoAppModel = (function (_super) {
         if (data.loggedIn) {
           that.set("useremail", data.user.email ? data.user.email : "N/A");
         }
+      },
+      onMessageReceivedCallback: function(message) {
+        // TODO make sure this is the one that was tapped in the notification center (when more than 1 was pending)
+        dialogs.alert({
+          title: "Push message: " + message.title,
+          message: JSON.stringify(message),
+          okButtonText: "W00t!"
+        });
       }
     }).then(
         function (result) {
-          dialogs.alert({
-            title: "Firebase is ready",
-            okButtonText: "Merci!"
-          });
+          console.log("Firebase is ready");
         },
         function (error) {
           console.log("firebase.init error: " + error);
         }
     );
+  };
+
+  // This can be used instead of passing it in from 'init'.
+  // This is not tied to a button, just showing what you'd need to do
+  DemoAppModel.prototype.doAddOnMessageReceivedCallback = function () {
+    firebase.addOnMessageReceivedCallback(
+      function(message) {
+        dialogs.alert({
+          title: "Push message: " + message.title,
+          message: JSON.stringify(message),
+          okButtonText: "Sw33t"
+        });
+      });
   };
 
   DemoAppModel.prototype.doGetRemoteConfig = function () {
