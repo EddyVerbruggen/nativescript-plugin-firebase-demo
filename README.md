@@ -23,15 +23,16 @@ Next, install the app's iOS and Android runtimes, as well as the app's npm depen
 $ tns install
 ```
 
-### Now take these steps to avoid build errors on Android
+#### Now take these steps to avoid build errors on Android
 
 - Copy `app/App_Resources/Android/google-services.json` to `platforms/android/google-services.json` or you'll run into the error "FirebaseApp with name [DEFAULT] doesn't exist."
 - Open `platforms/android/build.gradle` and [do these things](https://github.com/EddyVerbruggen/nativescript-plugin-firebase#open-platformsandroidbuildgradle).
 
-### Want to use Remote Config or Cloud Messaging?
+#### Want to use Remote Config or Cloud Messaging?
 Open `node_modules/nativescript-plugin-firebase/platforms/android/include.gradle` and
 `node_modules/nativescript-plugin-firebase/platforms/ios/Podfile` and uncomment the relevant lines. 
 
+## Running
 Now you can use the `run` command to run the demo app on iOS:
 
 ```
