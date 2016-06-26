@@ -17,10 +17,14 @@ var DemoAppModel = (function (_super) {
           that.set("useremail", data.user.email ? data.user.email : "N/A");
         }
       },
+      onPushTokenReceivedCallback: function(token) {
+        // you can use this token to send to your own backend server,
+        // so you can send notifications to this specific device
+        console.log("Firebase plugin received a push token: " + token);
+      },
       onMessageReceivedCallback: function(message) {
-        // TODO make sure this is the one that was tapped in the notification center (when more than 1 was pending)
         dialogs.alert({
-          title: "Push message: " + message.title,
+          title: "Push message: " + (message.title !== undefined ? message.title : ""),
           message: JSON.stringify(message),
           okButtonText: "W00t!"
         });
@@ -36,15 +40,26 @@ var DemoAppModel = (function (_super) {
   };
 
   // This can be used instead of passing it in from 'init'.
-  // This is not tied to a button, just showing what you'd need to do
+  // This is not tied to a button, just showing what you'd need to do.
   DemoAppModel.prototype.doAddOnMessageReceivedCallback = function () {
     firebase.addOnMessageReceivedCallback(
       function(message) {
         dialogs.alert({
-          title: "Push message: " + message.title,
+          title: "Push message: " + (message.title !== undefined ? message.title : ""),
           message: JSON.stringify(message),
           okButtonText: "Sw33t"
         });
+      });
+  };
+
+  // This can be used instead of passing it in from 'init'.
+  // This is not tied to a button, just showing what you'd need to do.
+  DemoAppModel.prototype.doAddOnPushTokenReceivedCallback = function () {
+    firebase.addOnPushTokenReceivedCallback(
+      function(token) {
+        // you can use this token to send to your own backend server,
+        // so you can send notifications to this specific device
+        console.log("Firebase plugin received a push token: " + token);
       });
   };
 
