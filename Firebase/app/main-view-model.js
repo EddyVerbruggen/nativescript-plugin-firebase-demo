@@ -49,7 +49,8 @@ var DemoAppModel = (function (_super) {
           message: JSON.stringify(message),
           okButtonText: "Sw33t"
         });
-      });
+      }
+    );
   };
 
   // This can be used instead of passing it in from 'init'.
@@ -60,7 +61,8 @@ var DemoAppModel = (function (_super) {
         // you can use this token to send to your own backend server,
         // so you can send notifications to this specific device
         console.log("Firebase plugin received a push token: " + token);
-      });
+      }
+    );
   };
 
   DemoAppModel.prototype.doGetRemoteConfig = function () {
