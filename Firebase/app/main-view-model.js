@@ -1,5 +1,6 @@
 var observable = require("data/observable");
 var dialogs = require("ui/dialogs");
+var fs = require("file-system");
 var firebase = require("nativescript-plugin-firebase");
 var DemoAppModel = (function (_super) {
   __extends(DemoAppModel, _super);
@@ -10,6 +11,7 @@ var DemoAppModel = (function (_super) {
   DemoAppModel.prototype.doInit = function () {
     var that = this;
     firebase.init({
+      storageBucket: 'gs://n-plugin-test.appspot.com',
       persist: true, // optional, default false
       onAuthStateChanged: function(data) { // optional
         console.log((data.loggedIn ? "Logged in to firebase" : "Logged out from firebase") + " (init's onAuthStateChanged callback)");
@@ -513,6 +515,72 @@ var DemoAppModel = (function (_super) {
           okButtonText: "OK, pity!"
         });
       }
+    );
+  };
+
+  DemoAppModel.prototype.doUploadFile = function () {
+    // let's first create a File object using the tns file module
+    var appPath = fs.knownFolders.currentApp().path;
+    var logoPath = appPath + "/res/telerik-logo.png";
+
+    firebase.uploadFile({
+      remoteFullPath: 'uploads/images/telerik-logo-uploaded.png',
+      // localFile: fs.File.fromPath(logoPath) // use this (a file-system module File object)
+      localFullPath: logoPath // or this, a full file path
+    }).then(
+        function (uploadedFile) {
+          dialogs.alert({
+            title: "File upload successful!",
+            message: JSON.stringify(uploadedFile),
+            okButtonText: "Cool!"
+          });
+        },
+        function (error) {
+          console.log("firebase.doUploadFile error: " + error);
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doDownloadFile = function () {
+    // let's first determine where we'll create the file using the 'file-system' module
+    var documents = fs.knownFolders.documents();
+    var logoPath = documents.path + "/telerik-logo-downloaded.png";
+
+    // this will create or overwrite a local file in the app's documents folder
+    var localLogoFile = documents.getFile("telerik-logo-downloaded.png");
+
+    firebase.downloadFile({
+      remoteFullPath: 'uploads/images/telerik-logo-uploaded.png',
+      // localFile: localLogoFile // use this (a file-system module File object)
+      localFullPath: logoPath // or this, a full file path
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "File download successful!",
+            message: "The file has been downloaded to the requested location",
+            okButtonText: "OK"
+          });
+        },
+        function (error) {
+          console.log("firebase.doDownloadFile error: " + error);
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doGetDownloadUrl = function () {
+    firebase.getDownloadUrl({
+      remoteFullPath: 'uploads/images/telerik-logo-uploaded.png'
+    }).then(
+        function (theUrl) {
+          dialogs.alert({
+            title: "File download URL determined",
+            message: "You can download the file at: " + theUrl,
+            okButtonText: "OK, OK"
+          });
+        },
+        function (error) {
+          console.log("firebase.doGetDownloadUrl error: " + error);
+        }
     );
   };
 
