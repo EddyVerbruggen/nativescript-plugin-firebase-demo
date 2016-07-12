@@ -300,6 +300,28 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doKeepUsersInSyncOn = function () {
+    firebase.keepInSync("/users", true).then(
+        function () {
+          console.log("firebase.keepInSync ON");
+        },
+        function (error) {
+          console.log("firebase.keepInSync error: " + error);
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doKeepUsersInSyncOff = function () {
+    firebase.keepInSync("/users", false).then(
+        function () {
+          console.log("firebase.keepInSync OFF");
+        },
+        function (error) {
+          console.log("firebase.keepInSync error: " + error);
+        }
+    );
+  };
+
   DemoAppModel.prototype.doAddChildEventListenerForUsers = function () {
     var that = this;
     var onChildEvent = function(result) {
