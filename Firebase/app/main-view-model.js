@@ -597,7 +597,7 @@ var DemoAppModel = (function (_super) {
           dialogs.alert({
             title: "File download URL determined",
             message: "You can download the file at: " + theUrl,
-            okButtonText: "OK, OK"
+            okButtonText: "OK OK"
           });
         },
         function (error) {
