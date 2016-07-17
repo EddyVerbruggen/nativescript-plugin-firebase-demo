@@ -584,7 +584,11 @@ var DemoAppModel = (function (_super) {
           });
         },
         function (error) {
-          console.log("firebase.doDownloadFile error: " + error);
+          dialogs.alert({
+            title: "File download error",
+            message: error,
+            okButtonText: "Mmkay!"
+          });
         }
     );
   };
@@ -601,7 +605,32 @@ var DemoAppModel = (function (_super) {
           });
         },
         function (error) {
-          console.log("firebase.doGetDownloadUrl error: " + error);
+          dialogs.alert({
+            title: "File download URL error",
+            message: error,
+            okButtonText: "Mmkay"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doDeleteFile = function () {
+    firebase.deleteFile({
+      remoteFullPath: 'uploads/images/telerik-logo-uploaded.png'
+    }).then(
+        function (theUrl) {
+          dialogs.alert({
+            title: "File deleted",
+            message: "Enjoy your day!",
+            okButtonText: "Thanks ;)"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "File deletion error",
+            message: error,
+            okButtonText: "OK"
+          });
         }
     );
   };
