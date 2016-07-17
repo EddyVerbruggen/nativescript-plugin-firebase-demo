@@ -75,10 +75,11 @@
 
               <Label row="21" colSpan="2" text="Google Cloud Storage" cssClass="subtitle" />
 
-              <Button row="22" colSpan="2" text="upload file" tap="{{ doUploadFile }}" cssClass="button button-storage" />
+              <Button row="22" col="0" text="upload file" tap="{{ doUploadFile }}" cssClass="button button-storage" />
+              <Button row="22" col="1" text="download file" tap="{{ doDownloadFile }}" cssClass="button button-storage" />
               
               <Button row="23" col="0" text="get download url" tap="{{ doGetDownloadUrl }}" cssClass="button button-storage" />
-              <Button row="23" col="1" text="download file" tap="{{ doDownloadFile }}" cssClass="button button-storage" />
+              <Button row="23" col="1" text="delete file" tap="{{ doDeleteFile }}" cssClass="button button-storage" />
             </GridLayout>
 
           </ScrollView>
