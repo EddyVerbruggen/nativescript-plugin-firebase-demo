@@ -283,8 +283,10 @@ var DemoAppModel = (function (_super) {
   };
 
   DemoAppModel.prototype.doLogout = function () {
+    var that = this;
     firebase.logout().then(
         function (result) {
+          that.set("useremail", null);
           dialogs.alert({
             title: "Logout OK",
             okButtonText: "OK, bye!"
@@ -403,11 +405,13 @@ var DemoAppModel = (function (_super) {
         [
           {
             name: 'Telerik',
-            country: 'Bulgaria'
+            country: 'Bulgaria',
+            since: 2000
           },
           {
             name: 'Google',
-            country: 'USA'
+            country: 'USA',
+            since: 1900
           }
         ]
     ).then(
@@ -469,13 +473,13 @@ var DemoAppModel = (function (_super) {
         // order by company.country
         orderBy: {
           type: firebase.QueryOrderByType.CHILD,
-          value: 'country' // mandatory when type is 'child'
+          value: 'since' // mandatory when type is 'child'
         },
         // but only companies named 'Telerik'
         // (this range relates to the orderBy clause)
         range: {
           type: firebase.QueryRangeType.EQUAL_TO,
-          value: 'Bulgaria'
+          value: 2000
         },
         // only the first 2 matches (not that there's only 1 in this case anyway)
         limit: {
