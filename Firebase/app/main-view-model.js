@@ -41,6 +41,56 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doLogAnayticsEvent = function () {
+    firebase.analytics.logEvent({
+      // see https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event.html
+      key: "add_to_cart",
+      parameters: [{ // optional
+        keyd: "item_id",
+        value: "p7654"
+      },
+      {
+        key: "item_name",
+        value: "abc"
+      }]
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Analytics event pushed",
+            okButtonText: "Awesome :)"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Analytics error",
+            message: errorMessage,
+            okButtonText: "Ehh, OK"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doSetAnalyticsUserProperty = function () {
+    firebase.analytics.setUserProperty({
+      key: "origin", // note that this needs to be preregistered, see https://support.google.com/firebase/answer/6317519?hl=en&ref_topic=6317489#create-property
+      value: "demoapp"
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Analytics user property set",
+            okButtonText: "Great :P"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Analytics error",
+            message: errorMessage,
+            okButtonText: "Ehhmmm, OK"
+          });
+        }
+    );
+  };
+
   // This can be used instead of passing it in from 'init'.
   // This is not tied to a button, just showing what you'd need to do.
   DemoAppModel.prototype.doAddOnMessageReceivedCallback = function () {
