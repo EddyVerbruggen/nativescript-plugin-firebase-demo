@@ -608,7 +608,10 @@ var DemoAppModel = (function (_super) {
     firebase.uploadFile({
       remoteFullPath: 'uploads/images/telerik-logo-uploaded.png',
       // localFile: fs.File.fromPath(logoPath) // use this (a file-system module File object)
-      localFullPath: logoPath // or this, a full file path
+      localFullPath: logoPath, // or this, a full file path
+      onProgress: function(status) {
+        console.log("Uploaded fraction: " + status.fractionCompleted + " (" + status.percentageCompleted + "%)");
+      }
     }).then(
         function (uploadedFile) {
           dialogs.alert({
