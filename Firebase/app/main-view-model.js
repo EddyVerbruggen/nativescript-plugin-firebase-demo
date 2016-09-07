@@ -46,7 +46,7 @@ var DemoAppModel = (function (_super) {
       // see https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.Event.html
       key: "add_to_cart",
       parameters: [{ // optional
-        keyd: "item_id",
+        key: "item_id",
         value: "p7654"
       },
       {
