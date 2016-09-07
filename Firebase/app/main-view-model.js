@@ -525,12 +525,18 @@ var DemoAppModel = (function (_super) {
           type: firebase.QueryOrderByType.CHILD,
           value: 'since' // mandatory when type is 'child'
         },
-        // but only companies named 'Telerik'
-        // (this range relates to the orderBy clause)
-        range: {
-          type: firebase.QueryRangeType.EQUAL_TO,
-          value: 2000
-        },
+        // but only companies 'since' a certain year (Telerik's value is 2000, which is imaginary btw)
+        // .. we're using 'ranges', but you could also use 'range' with type firebase.QueryRangeType.EQUAL_TO and value 2000
+        ranges: [
+          {
+            type: firebase.QueryRangeType.START_AT,
+            value: 1999
+          },
+          {
+            type: firebase.QueryRangeType.END_AT,
+            value: 2000
+          }
+        ],
         // only the first 2 matches (not that there's only 1 in this case anyway)
         limit: {
           type: firebase.QueryLimitType.LAST,

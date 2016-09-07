@@ -58,7 +58,7 @@
               <Button row="15" col="0" text="add valuelistener" tap="{{ doAddValueEventListenerForCompanies }}" cssClass="button button-company" />
               <Button row="15" col="1" text="store by setValue" tap="{{ doStoreCompaniesBySetValue }}" cssClass="button button-company" />
 
-              <Button row="16" col="0" text="query 'Bulgaria'" tap="{{ doQueryBulgarianCompanies }}" cssClass="button button-company" />
+              <Button row="16" col="0" text="query with range" tap="{{ doQueryBulgarianCompanies }}" cssClass="button button-company" />
               <Button row="16" col="1" text="remove path" tap="{{ doRemoveCompanies }}" cssClass="button button-company" />
 
               <Label row="17" col="0" text="Last update path:" cssClass="message"/>
