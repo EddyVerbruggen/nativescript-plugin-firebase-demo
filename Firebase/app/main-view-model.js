@@ -544,7 +544,8 @@ var DemoAppModel = (function (_super) {
         }
       }
     ).then(
-      function () {
+      function (result) {
+        console.log("This 'result' should be undefined since singleEvent is not set to true: " + result);
         console.log("firebase.doQueryBulgarianCompanies done; added a listener");
       },
       function (errorMessage) {
@@ -587,7 +588,8 @@ var DemoAppModel = (function (_super) {
         }
       }
     ).then(
-      function () {
+      function (result) {
+        console.log("This 'result' should be available since singleEvent is true: " + JSON.stringify(result));
         console.log("firebase.doQueryUsers done; added a listener");
       },
       function (errorMessage) {
