@@ -15,7 +15,7 @@
       <TabViewItem title="Demo">
         <TabViewItem.view>
           <ScrollView>
-            <GridLayout columns="*, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" horizontalAlignment="stretch" cssClass="tab-content">
+            <GridLayout columns="*, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" horizontalAlignment="stretch" cssClass="tab-content">
 
               <Button row="0" colSpan="2" text="init firebase - do this first" tap="{{ doInit }}" cssClass="button button-positive" />
 
@@ -53,38 +53,42 @@
               <Button row="13" col="0" text="query users once" tap="{{ doQueryUsers }}" cssClass="button button-user" />
               <Button row="13" col="1" text="remove path" tap="{{ doRemoveUsers }}" cssClass="button button-user" />
 
-              <Label row="14" colSpan="2" text="Methods on path /companies" cssClass="subtitle"/>
+              <Button row="14" colSpan="2" text="remove childlistener" tap="{{ doRemoveChildEventListenerForUsers }}" cssClass="button button-user" />
 
-              <Button row="15" col="0" text="add valuelistener" tap="{{ doAddValueEventListenerForCompanies }}" cssClass="button button-company" />
-              <Button row="15" col="1" text="store by setValue" tap="{{ doStoreCompaniesBySetValue }}" cssClass="button button-company" />
+              <Label row="15" colSpan="2" text="Methods on path /companies" cssClass="subtitle"/>
 
-              <Button row="16" col="0" text="query with range" tap="{{ doQueryBulgarianCompanies }}" cssClass="button button-company" />
-              <Button row="16" col="1" text="remove path" tap="{{ doRemoveCompanies }}" cssClass="button button-company" />
+              <Button row="16" col="0" text="add valuelistener" tap="{{ doAddValueEventListenerForCompanies }}" cssClass="button button-company" />
+              <Button row="16" col="1" text="store by setValue" tap="{{ doStoreCompaniesBySetValue }}" cssClass="button button-company" />
 
-              <Label row="17" col="0" text="Last update path:" cssClass="message"/>
-              <Label row="17" col="1" text="{{ path }}" cssClass="message" textWrap="true" />
+              <Button row="17" col="0" text="query with range" tap="{{ doQueryBulgarianCompanies }}" cssClass="button button-company" />
+              <Button row="17" col="1" text="remove path" tap="{{ doRemoveCompanies }}" cssClass="button button-company" />
 
-              <Label row="18" col="0" text="Type:" cssClass="message" />
-              <Label row="18" col="1" text="{{ type }}" cssClass="message"/>
+              <Button row="18" colSpan="2" text="remove valuelistener" tap="{{ doRemoveValueEventListenerForCompanies }}" cssClass="button button-company" />
 
-              <Label row="19" col="0" text="Key:" cssClass="message" />
-              <Label row="19" col="1" text="{{ key }}" cssClass="message" textWrap="true" />
+              <Label row="19" col="0" text="Last update path:" cssClass="message"/>
+              <Label row="19" col="1" text="{{ path }}" cssClass="message" textWrap="true" />
 
-              <Label row="20" col="0" text="Value:" cssClass="message" />
-              <Label row="20" col="1" text="{{ value }}" cssClass="message" textWrap="true" />
+              <Label row="20" col="0" text="Type:" cssClass="message" />
+              <Label row="20" col="1" text="{{ type }}" cssClass="message"/>
 
-              <Label row="21" colSpan="2" text="Google Cloud Storage" cssClass="subtitle" />
+              <Label row="21" col="0" text="Key:" cssClass="message" />
+              <Label row="21" col="1" text="{{ key }}" cssClass="message" textWrap="true" />
 
-              <Button row="22" col="0" text="upload file" tap="{{ doUploadFile }}" cssClass="button button-storage" />
-              <Button row="22" col="1" text="download file" tap="{{ doDownloadFile }}" cssClass="button button-storage" />
+              <Label row="22" col="0" text="Value:" cssClass="message" />
+              <Label row="22" col="1" text="{{ value }}" cssClass="message" textWrap="true" />
+
+              <Label row="23" colSpan="2" text="Google Cloud Storage" cssClass="subtitle" />
+
+              <Button row="24" col="0" text="upload file" tap="{{ doUploadFile }}" cssClass="button button-storage" />
+              <Button row="24" col="1" text="download file" tap="{{ doDownloadFile }}" cssClass="button button-storage" />
               
-              <Button row="23" col="0" text="get download url" tap="{{ doGetDownloadUrl }}" cssClass="button button-storage" />
-              <Button row="23" col="1" text="delete file" tap="{{ doDeleteFile }}" cssClass="button button-storage" />
+              <Button row="25" col="0" text="get download url" tap="{{ doGetDownloadUrl }}" cssClass="button button-storage" />
+              <Button row="25" col="1" text="delete file" tap="{{ doDeleteFile }}" cssClass="button button-storage" />
 
-              <Label row="24" colSpan="2" text="Analytics" cssClass="subtitle" />
+              <Label row="26" colSpan="2" text="Analytics" cssClass="subtitle" />
 
-              <Button row="25" col="0" text="log event" tap="{{ doLogAnayticsEvent }}" cssClass="button button-analytics" />
-              <Button row="25" col="1" text="set user property" tap="{{ doSetAnalyticsUserProperty }}" cssClass="button button-analytics" />
+              <Button row="27" col="0" text="log event" tap="{{ doLogAnayticsEvent }}" cssClass="button button-analytics" />
+              <Button row="27" col="1" text="set user property" tap="{{ doSetAnalyticsUserProperty }}" cssClass="button button-analytics" />
             </GridLayout>
 
           </ScrollView>

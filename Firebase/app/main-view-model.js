@@ -384,12 +384,31 @@ var DemoAppModel = (function (_super) {
     };
 
     firebase.addChildEventListener(onChildEvent, "/users").then(
-        function () {
+        function (result) {
+          that._userListenerWrapper = result;
           console.log("firebase.addChildEventListener added");
         },
         function (error) {
           console.log("firebase.addChildEventListener error: " + error);
         }
+    );
+  };
+
+  DemoAppModel.prototype.doRemoveChildEventListenerForUsers = function () {
+    if (!this._userListenerWrapper) {
+      return;
+    }
+    firebase.removeEventListeners(this._userListenerWrapper.listeners, this._userListenerWrapper.path).then(
+      function () {
+        console.log("firebase.doRemoveChildEventListenerForUsers success");
+        dialogs.alert({
+          title: "Listener(s) removed",
+          okButtonText: "OK"
+        });
+      },
+      function (error) {
+        console.log("firebase.removeEventListeners error: " + error);
+      }
     );
   };
 
@@ -412,12 +431,31 @@ var DemoAppModel = (function (_super) {
     };
 
    firebase.addValueEventListener(onValueEvent, path).then(
-        function () {
-          console.log("firebase.addValueEventListener added");
-        },
-        function (error) {
-          console.log("firebase.addValueEventListener error: " + error);
-        }
+      function (result) {
+        that._companiesListenerWrapper = result;
+        console.log("firebase.addValueEventListener added");
+      },
+      function (error) {
+        console.log("firebase.addValueEventListener error: " + error);
+      }
+    );
+  };
+
+  DemoAppModel.prototype.doRemoveValueEventListenerForCompanies = function () {
+    if (!this._companiesListenerWrapper) {
+      return;
+    }
+    firebase.removeEventListener(this._companiesListenerWrapper.listeners[0], this._companiesListenerWrapper.path).then(
+      function () {
+        console.log("firebase.doRemoveValueEventListenerForCompanies success");
+        dialogs.alert({
+          title: "Listener removed",
+          okButtonText: "OK"
+        });
+      },
+      function (error) {
+        console.log("firebase.removeEventListener error.");
+      }
     );
   };
 
