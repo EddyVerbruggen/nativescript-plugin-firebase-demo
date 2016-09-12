@@ -63,7 +63,7 @@
               <Button row="17" col="0" text="query with range" tap="{{ doQueryBulgarianCompanies }}" cssClass="button button-company" />
               <Button row="17" col="1" text="remove path" tap="{{ doRemoveCompanies }}" cssClass="button button-company" />
 
-              <Button row="18" colSpan="2" text="remove valuelistener" tap="{{ doRemoveValueEventListenerForCompanies }}" cssClass="button button-company" />
+              <Button row="18" colSpan="2" text="remove valuelistener" tap="{{ doRemoveValueEventListenersForCompanies }}" cssClass="button button-company" />
 
               <Label row="19" col="0" text="Last update path:" cssClass="message"/>
               <Label row="19" col="1" text="{{ path }}" cssClass="message" textWrap="true" />

@@ -402,7 +402,7 @@ var DemoAppModel = (function (_super) {
       function () {
         console.log("firebase.doRemoveChildEventListenerForUsers success");
         dialogs.alert({
-          title: "Listener(s) removed",
+          title: "Listener removed",
           okButtonText: "OK"
         });
       },
@@ -441,20 +441,20 @@ var DemoAppModel = (function (_super) {
     );
   };
 
-  DemoAppModel.prototype.doRemoveValueEventListenerForCompanies = function () {
+  DemoAppModel.prototype.doRemoveValueEventListenersForCompanies = function () {
     if (!this._companiesListenerWrapper) {
       return;
     }
-    firebase.removeEventListener(this._companiesListenerWrapper.listeners[0], this._companiesListenerWrapper.path).then(
+    firebase.removeEventListeners(this._companiesListenerWrapper.listeners, this._companiesListenerWrapper.path).then(
       function () {
-        console.log("firebase.doRemoveValueEventListenerForCompanies success");
+        console.log("firebase.doRemoveValueEventListenersForCompanies success");
         dialogs.alert({
           title: "Listener removed",
           okButtonText: "OK"
         });
       },
       function (error) {
-        console.log("firebase.removeEventListener error.");
+        console.log("firebase.removeEventListeners error.");
       }
     );
   };
