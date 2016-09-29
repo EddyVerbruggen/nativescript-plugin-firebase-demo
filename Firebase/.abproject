@@ -6,7 +6,7 @@
   "DisplayName": "Firebase",
   "Author": "Telerik",
   "Description": "Firebase",
-  "BundleVersion": "1.0.2",
+  "BundleVersion": "1.0.3",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -23,6 +23,6 @@
   ],
   "AndroidHardwareAcceleration": "false",
   "iOSStatusBarStyle": "Default",
-  "FrameworkVersion": "2.2.0",
+  "FrameworkVersion": "2.3.0",
   "Framework": "NativeScript"
 }
