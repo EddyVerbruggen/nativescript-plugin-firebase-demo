@@ -494,12 +494,14 @@ var DemoAppModel = (function (_super) {
           {
             name: 'Telerik',
             country: 'Bulgaria',
-            since: 2000
+            since: 2000,
+            updateTs: firebase.ServerValue.TIMESTAMP
           },
           {
             name: 'Google',
             country: 'USA',
-            since: 1900
+            since: 1900,
+            updateTs: firebase.ServerValue.TIMESTAMP
           }
         ]
     ).then(
