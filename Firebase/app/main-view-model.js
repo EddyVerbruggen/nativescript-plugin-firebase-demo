@@ -257,6 +257,18 @@ var DemoAppModel = (function (_super) {
             message: JSON.stringify(result),
             okButtonText: "Nice!"
           });
+
+          // now retrieve an auth token we can use to access Firebase from our server
+          firebase.getAuthToken({
+            forceRefresh: false
+          }).then(
+              function (token) {
+                console.log("Auth token retrieved: " + token);
+              },
+              function (errorMessage) {
+                console.log("Auth token retrieval error: " + errorMessage);
+              }
+          );
         },
         function (errorMessage) {
           dialogs.alert({
