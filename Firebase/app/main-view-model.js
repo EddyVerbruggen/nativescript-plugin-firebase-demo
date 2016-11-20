@@ -1,5 +1,6 @@
 var observable = require("data/observable");
 var dialogs = require("ui/dialogs");
+var utils = require("utils/utils");
 var fs = require("file-system");
 var firebase = require("nativescript-plugin-firebase");
 var DemoAppModel = (function (_super) {
@@ -18,7 +19,9 @@ var DemoAppModel = (function (_super) {
         if (data.loggedIn) {
           that.set("useremail", data.user.email ? data.user.email : "N/A");
         }
-      },
+      }
+//        commented these so we can wire them via a button
+/*
       onPushTokenReceivedCallback: function(token) {
         // you can use this token to send to your own backend server,
         // so you can send notifications to this specific device
@@ -31,6 +34,7 @@ var DemoAppModel = (function (_super) {
           okButtonText: "W00t!"
         });
       }
+      */
     }).then(
         function (result) {
           console.log("Firebase is ready");
@@ -91,9 +95,17 @@ var DemoAppModel = (function (_super) {
     );
   };
 
-  // This can be used instead of passing it in from 'init'.
-  // This is not tied to a button, just showing what you'd need to do.
-  DemoAppModel.prototype.doAddOnMessageReceivedCallback = function () {
+  // You would normally add these handlers in 'init', but if you want you can do it seperately as well:
+  DemoAppModel.prototype.doRegisterPushHandlers = function () {
+    firebase.addOnPushTokenReceivedCallback(
+      function(token) {
+        // you can use this token to send to your own backend server,
+        // so you can send notifications to this specific device
+        console.log("Firebase plugin received a push token: " + token);
+        //var pasteboard = utils.ios.getter(UIPasteboard, UIPasteboard.generalPasteboard);
+        //pasteboard.setValueForPasteboardType(token, kUTTypePlainText);
+      }
+    );
     firebase.addOnMessageReceivedCallback(
       function(message) {
         dialogs.alert({
@@ -105,16 +117,15 @@ var DemoAppModel = (function (_super) {
     );
   };
 
-  // This can be used instead of passing it in from 'init'.
-  // This is not tied to a button, just showing what you'd need to do.
-  DemoAppModel.prototype.doAddOnPushTokenReceivedCallback = function () {
-    firebase.addOnPushTokenReceivedCallback(
-      function(token) {
-        // you can use this token to send to your own backend server,
-        // so you can send notifications to this specific device
-        console.log("Firebase plugin received a push token: " + token);
-      }
-    );
+  DemoAppModel.prototype.doUnregisterForPushNotifications = function () {
+    firebase.unregisterForPushNotifications().then(
+      function () {
+        dialogs.alert({
+          title: "Unregistered",
+          message: "If you were registered, that is.",
+          okButtonText: "Got it, thanks!"
+        });
+      });
   };
 
   DemoAppModel.prototype.doGetRemoteConfig = function () {
