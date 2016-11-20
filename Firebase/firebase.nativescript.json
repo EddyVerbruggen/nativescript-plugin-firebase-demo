@@ -1,0 +1,9 @@
+{
+    "using_ios": true,
+    "using_android": true,
+    "remote_config": true,
+    "messaging": true,
+    "storage": true,
+    "facebook_auth": true,
+    "google_auth": true
+}
