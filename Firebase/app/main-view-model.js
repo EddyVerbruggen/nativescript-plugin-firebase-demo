@@ -355,6 +355,24 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doSendEmailVerification = function () {
+    firebase.sendEmailVerification().then(
+        function () {
+          dialogs.alert({
+            title: "Email sent!",
+            okButtonText: "Okay"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Error sending email verification",
+            message: error,
+            okButtonText: "Hmmmkay"
+          });
+        }
+    );
+  };
+
   DemoAppModel.prototype.doLogout = function () {
     var that = this;
     firebase.logout().then(
