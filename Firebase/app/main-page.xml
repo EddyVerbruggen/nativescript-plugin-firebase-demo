@@ -35,13 +35,15 @@
               <Button row="6" col="1" text="Facebook login" tap="{{ doLoginByFacebook }}" cssClass="button" />
 
               <Button row="7" col="0" text="get current user" tap="{{ doGetCurrentUser }}" cssClass="button" />
-              <Button row="7" col="1" text="del current user" tap="{{ doDeleteUser }}" cssClass="button" />
+              <Button row="7" col="1" text="update profile" tap="{{ doUpdateProfile }}" cssClass="button" />
 
-              <Label row="8" col="0" text="User email:" cssClass="message"/>
-              <Label row="8" col="1" text="{{ useremail }}" cssClass="message" textWrap="true" />
+              <Button row="8" col="0" colSpan="2" text="delete current user" tap="{{ doDeleteUser }}" cssClass="button" />
 
-              <Button row="9" colSpan="2" text="send email confirmation" tap="{{ doSendEmailVerification }}" cssClass="button" />
-              <Button row="10" colSpan="2" text="logout" tap="{{ doLogout }}" cssClass="button button-state" />
+              <Label row="9" col="0" text="User email:" cssClass="message"/>
+              <Label row="9" col="1" text="{{ useremail }}" cssClass="message" textWrap="true" />
+
+              <Button row="10" col="0" text="send email conf" tap="{{ doSendEmailVerification }}" cssClass="button" />
+              <Button row="10" col="1" text="logout" tap="{{ doLogout }}" cssClass="button" />
 
               <Label row="11" colSpan="2" text="Methods on path /users" cssClass="subtitle" />
 

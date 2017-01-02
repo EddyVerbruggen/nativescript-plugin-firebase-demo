@@ -193,6 +193,27 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doUpdateProfile = function () {
+    firebase.updateProfile({
+      displayName: 'Name UpdateTS ' + new Date().getTime(),
+      photoURL: 'https://avatars2.githubusercontent.com/u/1426370?v=3&u=9661f01efde3c412e19650c9b632297970cbe6ed&s=400'
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Profile updated",
+            okButtonText: "Nice!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Profile update error",
+            message: errorMessage,
+            okButtonText: "OK.."
+          });
+        }
+    );
+  };
+
   DemoAppModel.prototype.doLoginAnonymously = function () {
     firebase.login({
       type: firebase.LoginType.ANONYMOUS

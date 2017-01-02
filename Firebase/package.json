@@ -1,19 +1,19 @@
 {
-  "description": "NativeScript Application",
-  "license": "SEE LICENSE IN <your-license-filename>",
+  "description": "NativeScript Firebase plugin demo",
+  "license": "MIT",
   "readme": "NativeScript Application",
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.firebasedemo",
     "tns-android": {
-      "version": "2.4.0"
+      "version": "2.4.1"
     },
     "tns-ios": {
       "version": "2.4.0"
     }
   },
   "dependencies": {
-    "nativescript-plugin-firebase": "3.8.0",
+    "nativescript-plugin-firebase": "^3.8.0",
     "tns-core-modules": "2.4.0"
   },
   "devDependencies": {
