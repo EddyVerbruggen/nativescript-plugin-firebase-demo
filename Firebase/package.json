@@ -5,15 +5,15 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.firebasedemo",
-    "tns-android": {
-      "version": "2.4.1"
-    },
     "tns-ios": {
       "version": "2.4.0"
+    },
+    "tns-android": {
+      "version": "2.4.1"
     }
   },
   "dependencies": {
-    "nativescript-plugin-firebase": "^3.8.0",
+    "nativescript-plugin-firebase": "^3.9.0",
     "tns-core-modules": "2.4.0"
   },
   "devDependencies": {

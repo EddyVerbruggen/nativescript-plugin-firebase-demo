@@ -711,8 +711,8 @@ var DemoAppModel = (function (_super) {
 
     firebase.uploadFile({
       remoteFullPath: 'uploads/images/telerik-logo-uploaded.png',
-      // localFile: fs.File.fromPath(logoPath) // use this (a file-system module File object)
-      localFullPath: logoPath, // or this, a full file path
+      localFile: fs.File.fromPath(logoPath), // use this (a file-system module File object)
+      // localFullPath: logoPath, // or this, a full file path
       onProgress: function(status) {
         console.log("Uploaded fraction: " + status.fractionCompleted + " (" + status.percentageCompleted + "%)");
       }
@@ -768,7 +768,7 @@ var DemoAppModel = (function (_super) {
           dialogs.alert({
             title: "File download URL determined",
             message: "You can download the file at: " + theUrl,
-            okButtonText: "OK OK"
+            okButtonText: "OK!"
           });
         },
         function (error) {
@@ -776,6 +776,68 @@ var DemoAppModel = (function (_super) {
             title: "File download URL error",
             message: error,
             okButtonText: "Mmkay"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doReauthenticatePwdUser = function () {
+    firebase.reauthenticate({
+      type: firebase.LoginType.PASSWORD,
+      email: 'eddy@x-services.nl',
+      password: 'firebase'
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Re-authenticated password user",
+            okButtonText: "OK"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Re-authenticate error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doReauthenticateGoogleUser = function () {
+    firebase.reauthenticate({
+      type: firebase.LoginType.GOOGLE
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Re-authenticated Google user",
+            okButtonText: "OK"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Re-authenticate error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doReauthenticateFacebookUser = function () {
+    firebase.reauthenticate({
+      type: firebase.LoginType.FACEBOOK
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Re-authenticated Facebook user",
+            okButtonText: "OK"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Re-authenticate error",
+            message: error,
+            okButtonText: "OK"
           });
         }
     );
