@@ -864,6 +864,44 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doSubscribeToTopic = function () {
+    firebase.subscribeToTopic("demo").then(
+        function () {
+          dialogs.alert({
+            title: "Subscribed",
+            message: ".. to the 'demo' topic",
+            okButtonText: "Okay, interesting"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Subscribe error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doUnsubscribeFromTopic = function () {
+    firebase.unsubscribeFromTopic("demo").then(
+        function () {
+          dialogs.alert({
+            title: "Unsubscribed",
+            message: ".. from the 'demo' topic",
+            okButtonText: "Okay, very interesting"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Unsubscribe error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
   return DemoAppModel;
 })(observable.Observable);
 exports.DemoAppModel = DemoAppModel;

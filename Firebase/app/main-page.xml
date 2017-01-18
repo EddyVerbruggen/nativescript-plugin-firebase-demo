@@ -99,7 +99,10 @@
 
               <Label row="30" colSpan="2" text="Firebase Cloud Messaging" cssClass="subtitle" />
 
-              <Button row="31" colSpan="2" text="register push handlers" tap="{{ doRegisterPushHandlers }}" cssClass="button" />
+              <Button row="31" colSpan="2" text="register push handlers" tap="{{ doRegisterPushHandlers }}" cssClass="button button-messaging" />
+
+              <Button row="32" col="0" text="topic subscribe" tap="{{ doSubscribeToTopic }}" cssClass="button button-messaging" />
+              <Button row="32" col="1" text="topic unsubscribe" tap="{{ doUnsubscribeFromTopic }}" cssClass="button button-messaging" />
             </GridLayout>
 
           </ScrollView>
