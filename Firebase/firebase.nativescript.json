@@ -6,5 +6,6 @@
     "crash_reporting": true,
     "storage": true,
     "facebook_auth": true,
-    "google_auth": true
+    "google_auth": true,
+    "admob": true
 }

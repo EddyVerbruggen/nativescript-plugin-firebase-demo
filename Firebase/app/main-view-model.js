@@ -95,6 +95,77 @@ var DemoAppModel = (function (_super) {
     );
   };
 
+  DemoAppModel.prototype.doShowAdMobBanner = function () {
+    firebase.admob.showBanner({
+      size: firebase.admob.AD_SIZE.SMART_BANNER,
+      margins: {
+        bottom: 0
+      },
+      androidBannerId: "ca-app-pub-9517346003011652/7749101329",
+      iosBannerId: "ca-app-pub-9517346003011652/3985369721",
+      testing: true,
+      // Android automatically adds the connected device as test device with testing:true, iOS does not
+      iosTestDeviceIds: [
+          "45d77bf513dfabc2949ba053da83c0c7b7e87715", // Eddy's iPhone 6s
+          "fee4cf319a242eab4701543e4c16db89c722731f"  // Eddy's iPad Pro
+      ]
+    }).then(
+        function () {
+          console.log("AdMob banner showing");
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "AdMob error",
+            message: errorMessage,
+            okButtonText: "Hmmkay"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doShowAdMobInterstitial = function () {
+    firebase.admob.showInterstitial({
+      iosInterstitialId: "ca-app-pub-9517346003011652/6938836122",
+      androidInterstitialId: "ca-app-pub-9517346003011652/6938836122",
+      testing: true,
+      // Android automatically adds the connected device as test device with testing:true, iOS does not
+      iosTestDeviceIds: [
+          "45d77bf513dfabc2949ba053da83c0c7b7e87715", // Eddy's iPhone 6s
+          "fee4cf319a242eab4701543e4c16db89c722731f"  // Eddy's iPad Pro
+      ]
+    }).then(
+        function () {
+          console.log("AdMob interstitial showing");
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "AdMob error",
+            message: errorMessage,
+            okButtonText: "Hmmkay"
+          });
+        }
+    );
+  };
+
+  /**
+   * Note that an interstitial is supposed to be hidden by clicking the close button,
+   * so there's no function to do it programmatically.
+   */
+  DemoAppModel.prototype.doHideAdMobBanner = function () {
+    firebase.admob.hideBanner().then(
+        function () {
+          console.log("AdMob banner hidden");
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "AdMob error",
+            message: errorMessage,
+            okButtonText: "Hmmkay"
+          });
+        }
+    );
+  };
+
   // You would normally add these handlers in 'init', but if you want you can do it seperately as well:
   DemoAppModel.prototype.doRegisterPushHandlers = function () {
     firebase.addOnPushTokenReceivedCallback(
