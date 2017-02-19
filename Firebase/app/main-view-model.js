@@ -728,7 +728,7 @@ var DemoAppModel = (function (_super) {
       },
       function (errorMessage) {
         dialogs.alert({
-          title: "Login error",
+          title: "Query error",
           message: errorMessage,
           okButtonText: "OK, pity"
         });
@@ -772,7 +772,7 @@ var DemoAppModel = (function (_super) {
       },
       function (errorMessage) {
         dialogs.alert({
-          title: "Login error",
+          title: "Query error",
           message: errorMessage,
           okButtonText: "OK, pity!"
         });
