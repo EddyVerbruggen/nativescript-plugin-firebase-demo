@@ -15,7 +15,7 @@
       <TabViewItem title="Demo">
         <TabViewItem.view>
           <ScrollView style="margin-bottom: 40">
-            <GridLayout columns="*, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" horizontalAlignment="stretch" cssClass="tab-content">
+            <GridLayout columns="*, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" horizontalAlignment="stretch" cssClass="tab-content">
 
               <Button row="0" colSpan="2" text="init firebase - do this first" tap="{{ doInit }}" cssClass="button button-positive" />
 
@@ -103,6 +103,15 @@
               <Button row="34" colSpan="2" text="register push handlers" tap="{{ doRegisterPushHandlers }}" cssClass="button button-messaging" />
               <Button row="35" col="0" text="topic subscribe" tap="{{ doSubscribeToTopic }}" cssClass="button button-messaging" />
               <Button row="35" col="1" text="topic unsubscribe" tap="{{ doUnsubscribeFromTopic }}" cssClass="button button-messaging" />
+
+              <Label row="36" colSpan="2" text="Firebase Crash Reporing" cssClass="subtitle" />
+              <Button row="37" col="0" text="log message" tap="{{ doLogMessage }}" cssClass="button button-crash" />
+              <iOS>
+                <Button row="37" col="1" text="force crash" tap="{{ doForceCrashIOS }}" cssClass="button button-crash" />
+              </iOS>
+              <Android>
+                <Button row="37" col="1" text="force crash" tap="{{ doForceCrashAndroid }}" cssClass="button button-crash" />
+              </Android>
             </GridLayout>
 
           </ScrollView>

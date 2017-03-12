@@ -19,22 +19,19 @@ var DemoAppModel = (function (_super) {
         if (data.loggedIn) {
           that.set("useremail", data.user.email ? data.user.email : "N/A");
         }
-      }
-//        commented these so we can wire them via a button
-/*
+      },
+      // testing push wiring in init for iOS:
       onPushTokenReceivedCallback: function(token) {
         // you can use this token to send to your own backend server,
         // so you can send notifications to this specific device
         console.log("Firebase plugin received a push token: " + token);
+        // this is for iOS, to copy the token onto the clipboard
+        // var pasteboard = utils.ios.getter(UIPasteboard, UIPasteboard.generalPasteboard);
+        // pasteboard.setValueForPasteboardType(token, kUTTypePlainText);
       },
       onMessageReceivedCallback: function(message) {
-        dialogs.alert({
-          title: "Push message: " + (message.title !== undefined ? message.title : ""),
-          message: JSON.stringify(message),
-          okButtonText: "W00t!"
-        });
+        console.log("--- message received: " + message);
       }
-      */
     }).then(
         function (result) {
           console.log("Firebase is ready");
@@ -181,8 +178,8 @@ var DemoAppModel = (function (_super) {
       function(message) {
         console.log("----- message received: " + message);
         dialogs.alert({
-          title: "Push message: " + (message.title !== undefined ? message.title : ""),
-          message: JSON.stringify(message),
+          title: "Push message!",
+          message: (message.title !== undefined ? message.title : ""),
           okButtonText: "Sw33t"
         });
       }
@@ -976,6 +973,36 @@ var DemoAppModel = (function (_super) {
           });
         }
     );
+  };
+
+  DemoAppModel.prototype.doLogMessage = function () {
+    firebase.sendCrashLog({
+      message:"Hey, I was logged!",
+      showInConsole: true
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Message logged",
+            message: "Check the Firebase console",
+            okButtonText: "Okay"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "Logging error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
+  DemoAppModel.prototype.doForceCrashIOS = function () {
+    assert(false);
+  };
+
+  DemoAppModel.prototype.doForceCrashAndroid = function () {
+    throw new java.lang.Exception("Forced an exception.");
   };
 
   return DemoAppModel;
