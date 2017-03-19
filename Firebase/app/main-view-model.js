@@ -94,9 +94,9 @@ var DemoAppModel = (function (_super) {
 
   DemoAppModel.prototype.doShowAdMobBanner = function () {
     firebase.admob.showBanner({
-      size: firebase.admob.AD_SIZE.SMART_BANNER,
+      size: firebase.admob.AD_SIZE.SKYSCRAPER,
       margins: {
-        bottom: 0
+        top: 20
       },
       androidBannerId: "ca-app-pub-9517346003011652/7749101329",
       iosBannerId: "ca-app-pub-9517346003011652/3985369721",
