@@ -29,7 +29,7 @@ var DemoAppModel = (function (_super) {
         // this is for iOS, to copy the token onto the clipboard
         if (platform.isIOS) {
           var pasteboard = utils.ios.getter(UIPasteboard, UIPasteboard.generalPasteboard);
-          pasteboard.setValueForPasteboardType(token, kUTTypePlainText);
+          pasteboard.setValueForPasteboardType("[Firebase demo app] Last push token received: " + token, kUTTypePlainText);
         }
       },
       onMessageReceivedCallback: function(message) {
