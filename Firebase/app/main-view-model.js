@@ -3,6 +3,7 @@ var dialogs = require("ui/dialogs");
 var utils = require("utils/utils");
 var fs = require("file-system");
 var firebase = require("nativescript-plugin-firebase");
+var platform = require("platform");
 var DemoAppModel = (function (_super) {
   __extends(DemoAppModel, _super);
   function DemoAppModel() {
@@ -26,11 +27,20 @@ var DemoAppModel = (function (_super) {
         // so you can send notifications to this specific device
         console.log("Firebase plugin received a push token: " + token);
         // this is for iOS, to copy the token onto the clipboard
-        // var pasteboard = utils.ios.getter(UIPasteboard, UIPasteboard.generalPasteboard);
-        // pasteboard.setValueForPasteboardType(token, kUTTypePlainText);
+        if (platform.isIOS) {
+          var pasteboard = utils.ios.getter(UIPasteboard, UIPasteboard.generalPasteboard);
+          pasteboard.setValueForPasteboardType(token, kUTTypePlainText);
+        }
       },
       onMessageReceivedCallback: function(message) {
         console.log("--- message received: " + message);
+        setTimeout(function() {
+          dialogs.alert({
+            title: "Push message!",
+            message: (message.title !== undefined ? message.title : ""),
+            okButtonText: "Sw33t"
+          });
+        }, 500);
       }
     }).then(
         function (result) {
