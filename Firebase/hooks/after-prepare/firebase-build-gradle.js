@@ -5,7 +5,7 @@ var fs = require("fs");
 module.exports = function() {
 
     console.log("Configure firebase");
-    var buildGradlePath = path.join(__dirname, "..", "..", "platforms", "android", "build.gradle"); 
+    var buildGradlePath = path.join(__dirname, "..", "..", "platforms", "android", "build.gradle");
     if (fs.existsSync(buildGradlePath)) {
         var buildGradleContent = fs.readFileSync(buildGradlePath).toString();
 
