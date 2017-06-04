@@ -983,6 +983,47 @@ function createViewModel() {
     );
   };
 
+  viewModel.sendInvitation = function () {
+    firebase.invites.sendInvitation({
+      title: "Invite title here",
+      message: "Invite message here"
+    }).then(
+        function (result) { // SendInvitationResult
+          dialogs.alert({
+            title: result.count + "invitations sent",
+            message: "ID's: " + JSON.stringify(result.invitationIds),
+            okButtonText: "Okay"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "sendInvitation error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
+  viewModel.getInvitation = function () {
+    firebase.invites.getInvitation().then(
+        function (result) { // GetInvitationResult
+          dialogs.alert({
+            title: "Invitation result",
+            message: JSON.stringify(result),
+            okButtonText: "Okay"
+          });
+        },
+        function (error) {
+          dialogs.alert({
+            title: "getInvitation error",
+            message: error,
+            okButtonText: "OK"
+          });
+        }
+    );
+  };
+
   viewModel.doLogMessage = function () {
     firebase.sendCrashLog({
       message: "Hey, I was logged!",

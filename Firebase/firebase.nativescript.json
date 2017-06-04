@@ -7,5 +7,6 @@
     "storage": true,
     "facebook_auth": true,
     "google_auth": true,
-    "admob": true
+    "admob": true,
+    "invites": true
 }
