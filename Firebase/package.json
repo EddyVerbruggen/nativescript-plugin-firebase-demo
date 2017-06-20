@@ -12,6 +12,10 @@
       "version": "3.0.1"
     }
   },
+  "scripts": {
+    "ios": "tns run ios --syncAllFiles",
+    "android": "rm -rf platforms/android && tns run android --syncAllFiles"
+  },
   "dependencies": {
     "nativescript-plugin-firebase": "4.0.0",
     "tns-core-modules": "^3.0.1"
