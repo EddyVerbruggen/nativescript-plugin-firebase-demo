@@ -429,8 +429,7 @@ function createViewModel() {
   };
 
   viewModel.doLoginByPhone = function () {
-    // TODO remove this prefill
-    dialogs.prompt("Your phone number", "+31650298958").then(function (promptResult) {
+    dialogs.prompt("Your phone number", "+31612345678").then(function (promptResult) {
       if (!promptResult.result) {
         return;
       }
@@ -439,7 +438,8 @@ function createViewModel() {
         // note that you need to enable phone login in your firebase instance
         type: firebase.LoginType.PHONE,
         phoneOptions: {
-          phoneNumber: promptResult.text
+          phoneNumber: promptResult.text,
+          verificationPrompt: "The received verification code" // default "Verification code"
         }
       }).then(
           function (result) {
