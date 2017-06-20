@@ -17,7 +17,7 @@ function createViewModel() {
       onAuthStateChanged: function (data) { // optional
         console.log((data.loggedIn ? "Logged in to firebase" : "Logged out from firebase") + " (init's onAuthStateChanged callback)");
         if (data.loggedIn) {
-          that.set("useremail", data.user.email ? data.user.email : "N/A");
+          that.set("userEmailOrPhone", data.user.email ? data.user.email : (data.user.phoneNumber ? data.user.phoneNumber : "N/A"));
         }
       },
       // testing push wiring in init for iOS:
@@ -172,6 +172,18 @@ function createViewModel() {
     );
   };
 
+  viewModel.doGetCurrentPushToken = function () {
+    firebase.getCurrentPushToken().then(function (token) {
+      // may be null if not known yet
+      console.log("Current push token: " + token);
+      dialogs.alert({
+        title: "Current Push Token",
+        message: (token === null ? "Not received yet" : token),
+        okButtonText: "OK, thx"
+      });
+    });
+  };
+
   // You would normally add these handlers in 'init', but if you want you can do it seperately as well:
   viewModel.doRegisterPushHandlers = function () {
     firebase.addOnPushTokenReceivedCallback(
@@ -193,9 +205,9 @@ function createViewModel() {
           });
         }
     ).then(function () {
-      console.log("*********************************** success @ addOnMessageReceivedCallback")
+      console.log("Added addOnMessageReceivedCallback")
     }, function (err) {
-      console.log("*********************************** error @ addOnMessageReceivedCallback: " + err)
+      console.log("Failed to add addOnMessageReceivedCallback: " + err)
     });
   };
 
@@ -317,6 +329,26 @@ function createViewModel() {
     );
   };
 
+  viewModel.doFetchProvidersForEmail = function () {
+    var email = "eddy@x-services.nl";
+    firebase.fetchProvidersForEmail(email).then(
+        function (result) {
+          dialogs.alert({
+            title: "Providers for " + email,
+            message: JSON.stringify(result), // likely to be ["password"]
+            okButtonText: "Thanks!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Fetch Providers for Email error",
+            message: errorMessage,
+            okButtonText: "OK, pity.."
+          });
+        }
+    );
+  };
+
   viewModel.doCreateUser = function () {
     firebase.createUser({
       email: 'eddy@x-services.nl',
@@ -361,9 +393,11 @@ function createViewModel() {
     firebase.login({
       // note that you need to enable email-password login in your firebase instance
       type: firebase.LoginType.PASSWORD,
-      // note that these credentials have been configured in our firebase instance
-      email: 'eddy@x-services.nl',
-      password: 'firebase'
+      passwordOptions: {
+        // note that these credentials have been pre-configured in our demo firebase instance
+        email: 'eddy@x-services.nl',
+        password: 'firebase'
+      }
     }).then(
         function (result) {
           dialogs.alert({
@@ -392,6 +426,38 @@ function createViewModel() {
           });
         }
     );
+  };
+
+  viewModel.doLoginByPhone = function () {
+    // TODO remove this prefill
+    dialogs.prompt("Your phone number", "+31650298958").then(function (promptResult) {
+      if (!promptResult.result) {
+        return;
+      }
+      console.log(">> using promptResult.text: " + promptResult.text);
+      firebase.login({
+        // note that you need to enable phone login in your firebase instance
+        type: firebase.LoginType.PHONE,
+        phoneOptions: {
+          phoneNumber: promptResult.text
+        }
+      }).then(
+          function (result) {
+            dialogs.alert({
+              title: "Phone login OK",
+              message: JSON.stringify(result),
+              okButtonText: "Cool"
+            });
+          },
+          function (errorMessage) {
+            dialogs.alert({
+              title: "Phone login error",
+              message: errorMessage,
+              okButtonText: "OK, damn shame"
+            });
+          }
+      );
+    });
   };
 
   viewModel.doLoginByFacebook = function () {
@@ -480,7 +546,7 @@ function createViewModel() {
     var that = this;
     firebase.logout().then(
         function (result) {
-          that.set("useremail", null);
+          that.set("userEmailOrPhone", null);
           dialogs.alert({
             title: "Logout OK",
             okButtonText: "OK, bye!"
@@ -865,8 +931,10 @@ function createViewModel() {
   viewModel.doReauthenticatePwdUser = function () {
     firebase.reauthenticate({
       type: firebase.LoginType.PASSWORD,
-      email: 'eddy@x-services.nl',
-      password: 'firebase'
+      passwordOptions: {
+        email: 'eddy@x-services.nl',
+        password: 'firebase'
+      }
     }).then(
         function () {
           dialogs.alert({
@@ -990,7 +1058,7 @@ function createViewModel() {
     }).then(
         function (result) { // SendInvitationResult
           dialogs.alert({
-            title: result.count + "invitations sent",
+            title: result.count + " invitations sent",
             message: "ID's: " + JSON.stringify(result.invitationIds),
             okButtonText: "Okay"
           });

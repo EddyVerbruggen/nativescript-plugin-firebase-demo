@@ -4,3 +4,4 @@ platforms
 node_modules
 lib
 Firebase/bin
+Firebase/.nsbuildinfo
