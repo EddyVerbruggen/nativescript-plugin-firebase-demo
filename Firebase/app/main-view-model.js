@@ -101,6 +101,34 @@ function createViewModel() {
     );
   };
 
+  viewModel.doSetScreenNameA = function () {
+    this._setScreenName("Screen A");
+  };
+
+  viewModel.doSetScreenNameB = function () {
+    this._setScreenName("Screen B");
+  };
+
+  viewModel._setScreenName = function (name) {
+    firebase.analytics.setScreenName({
+      screenName: name
+    }).then(
+        function () {
+          dialogs.alert({
+            title: "Analytics screen name set to: " + name,
+            okButtonText: "Great!"
+          });
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Analytics error",
+            message: errorMessage,
+            okButtonText: "Ehhmmm, OK"
+          });
+        }
+    );
+  };
+
   viewModel.doShowAdMobBanner = function () {
     firebase.admob.showBanner({
       size: firebase.admob.AD_SIZE.SMART_BANNER,
