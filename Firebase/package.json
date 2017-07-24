@@ -17,7 +17,7 @@
     "android": "rm -rf platforms/android && tns run android --syncAllFiles"
   },
   "dependencies": {
-    "nativescript-plugin-firebase": "4.0.4",
+    "nativescript-plugin-firebase": "4.0.5",
     "tns-core-modules": "^3.0.1"
   },
   "devDependencies": {
