@@ -358,8 +358,6 @@ function createViewModel() {
   };
 
   viewModel.doFetchProvidersForEmail = function () {
-    var email = "eddy@x-services.nl";
-
     firebase.getCurrentUser().then(
         function (user) {
           if (!user || !user.email) {
@@ -371,7 +369,6 @@ function createViewModel() {
             return;
           }
 
-          console.log(">>> fetching providers for " + user.email);
           firebase.fetchProvidersForEmail(user.email).then(
               function (result) {
                 dialogs.alert({
