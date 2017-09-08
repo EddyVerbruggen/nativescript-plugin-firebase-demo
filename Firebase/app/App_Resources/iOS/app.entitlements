@@ -4,5 +4,9 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
-</dict>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:j4ctx.app.goo.gl</string>
+	</array>
+	</dict>
 </plist>

@@ -9,7 +9,6 @@ function createViewModel() {
   var viewModel = new Observable();
 
   viewModel.doInit = function () {
-    console.log("-- init");
     var that = this;
     firebase.init({
       storageBucket: 'gs://n-plugin-test.appspot.com',
@@ -38,6 +37,16 @@ function createViewModel() {
             title: "Push message!",
             message: (message.title !== undefined ? message.title : ""),
             okButtonText: "Sw33t"
+          });
+        }, 500);
+      },
+      onDynamicLinkCallback: function (result) {
+        console.log("dynamic link callback invoked with: " +  result);
+        setTimeout(function () {
+          dialogs.alert({
+            title: "Dynamic Link!",
+            message: result,
+            okButtonText: "Awesome!"
           });
         }, 500);
       }
@@ -225,7 +234,7 @@ function createViewModel() {
     );
     firebase.addOnMessageReceivedCallback(
         function (message) {
-          console.log("----- message received: " + message);
+          console.log("----- message received: " + JSON.stringify(message));
           dialogs.alert({
             title: "Push message!",
             message: (message.title !== undefined ? message.title : ""),
