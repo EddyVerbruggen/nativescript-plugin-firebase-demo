@@ -815,6 +815,10 @@ function createViewModel() {
               value: 2000
             }
           ],
+          // range: {
+          //   type: firebase.QueryRangeType.EQUAL_TO,
+          //   value: null
+          // },
           // only the first 2 matches (not that there's only 1 in this case anyway)
           limit: {
             type: firebase.QueryLimitType.LAST,
