@@ -359,22 +359,36 @@ function createViewModel() {
 
   viewModel.doFetchProvidersForEmail = function () {
     var email = "eddy@x-services.nl";
-    firebase.fetchProvidersForEmail(email).then(
-        function (result) {
-          dialogs.alert({
-            title: "Providers for " + email,
-            message: JSON.stringify(result), // likely to be ["password"]
-            okButtonText: "Thanks!"
-          });
-        },
-        function (errorMessage) {
-          dialogs.alert({
-            title: "Fetch Providers for Email error",
-            message: errorMessage,
-            okButtonText: "OK, pity.."
-          });
-        }
-    );
+
+    firebase.getCurrentUser().then(
+        function (user) {
+          if (!user || !user.email) {
+            dialogs.alert({
+              title: "Can't fetch providers",
+              message: "No user with emailaddress logged in.",
+              okButtonText: "OK, makes sense.."
+            });
+            return;
+          }
+
+          console.log(">>> fetching providers for " + user.email);
+          firebase.fetchProvidersForEmail(user.email).then(
+              function (result) {
+                dialogs.alert({
+                  title: "Providers for " + user.email,
+                  message: JSON.stringify(result), // likely to be ["password"]
+                  okButtonText: "Thanks!"
+                });
+              },
+              function (errorMessage) {
+                dialogs.alert({
+                  title: "Fetch Providers for Email error",
+                  message: errorMessage,
+                  okButtonText: "OK, pity.."
+                });
+              }
+          );
+        });
   };
 
   viewModel.doCreateUser = function () {
@@ -869,17 +883,17 @@ function createViewModel() {
           }
         }
     ).then(
-      function (result) {
-        console.log("This 'result' should be available since singleEvent is true: " + JSON.stringify(result));
-        console.log("firebase.doQueryUsers done; added a listener");
-      },
-      function (errorMessage) {
-        dialogs.alert({
-          title: "Query error",
-          message: errorMessage,
-          okButtonText: "OK, pity!"
-        });
-      }
+        function (result) {
+          console.log("This 'result' should be available since singleEvent is true: " + JSON.stringify(result));
+          console.log("firebase.doQueryUsers done; added a listener");
+        },
+        function (errorMessage) {
+          dialogs.alert({
+            title: "Query error",
+            message: errorMessage,
+            okButtonText: "OK, pity!"
+          });
+        }
     );
   };
 
