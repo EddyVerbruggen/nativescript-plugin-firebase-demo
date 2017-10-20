@@ -142,7 +142,7 @@ function createViewModel() {
     firebase.admob.showBanner({
       size: firebase.admob.AD_SIZE.SMART_BANNER,
       margins: {
-        bottom: 50
+        bottom: platform.isIOS ? 50 : 0
       },
       androidBannerId: "ca-app-pub-9517346003011652/7749101329",
       iosBannerId: "ca-app-pub-9517346003011652/3985369721",
