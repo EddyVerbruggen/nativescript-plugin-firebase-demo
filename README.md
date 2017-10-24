@@ -1,6 +1,6 @@
 # nativescript-plugin-firebase demo app
 
-Demo app for the {N} [Firebase plugin](https://www.npmjs.com/package/nativescript-plugin-firebase)
+> DEPRECATED: The demo app for the NativeScript Firebase plugin is now inlined in the [plugin repo](https://github.com/EddyVerbruggen/nativescript-plugin-firebase). 🚀
 
 If you want to see this app in action first, check this 41 second demo:
 [![YouTube demo, 41 sec](screenshots/yt-thumb.png)](https://youtu.be/7zYU5e0Djkw "YouTube demo, 41 sec")
